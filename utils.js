@@ -7,6 +7,11 @@
 // color to hsl
 // hsl to color
 
+// threejs specific
+// load .obj and create mesh
+// visible area (raycasted)
+
+
 // random element from array
 function randomFromArray(array) {
   return array[Math.floor(Math.random() * array.length)]
@@ -104,9 +109,3 @@ function remap(value, inputMin, inputMax, outputMin, outputMax) {
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max)
 }
-
-
-// threejs specific
-
-// load .obj and create mesh
-// visible area (raycasted)
