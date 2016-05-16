@@ -2,15 +2,52 @@
 
 // random unique (history + steps to remember)
 // distance
-// radtodeg
-// degtorad
 // color to hsl
 // hsl to color
 
 // threejs specific
 // load .obj and create mesh
-// visible area (raycasted)
 
+// distance
+function distance(x1, y1, x2, y2) {
+  return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
+}
+
+// radtodeg
+function radToDeg(radians) {
+  return radians * (180 / Math.PI)
+}
+
+// degtorad
+function degToRad(degrees) {
+  return degrees * (Math.PI / 180)
+}
+
+// frustrum size
+//
+// http://gamedev.stackexchange.com/a/96712/18433
+// the frustrum width/height of a projected scene
+// this comes in handy to know the boundries of the scene from the camera's perspective
+// fov: the camera's field of view
+// aspect: the width/height aspect ratio of the viewport
+// distance: the distance from the object to the camera
+//
+// threejs example to get the screen size at the camera's position:
+// frustrumSize(camera.fov, this.screenWidth / this.screenHeight, this.camera.position.z)
+function frustrumSizeAtCamera(camera, viewportWidth, viewportHeight) {
+  return frustrumSize(camera.fov, viewportWidth / viewportHeight, this.camera.position.z)
+}
+function frustrumSizeForCamera(camera, viewportWidth, viewportHeight) {
+  return frustrumSize(camera.fov, viewportWidth / viewportHeight, this.camera.position.z)
+}
+function frustrumSize(fov, aspect, distance) {
+  let frustumHeight = 2.0 * distance * Math.tan(fov * 0.5 * (Math.PI / 180))
+  let frustumWidth = frustumHeight * aspect
+  return {
+    width: frustrumWidth,
+    height: frustrumHeight
+  }
+}
 
 // random element from array
 function randomFromArray(array) {
@@ -67,8 +104,8 @@ function defaultParameter(parameter, defaultValue) {
 // When the cursor is Bottom Right of the screen, the returned value is 1, 1
 //
 // Optionally, give width and height if you don't want the function to use the window inner width/height
-function normalizeMouse(event, width, height) { normalizeCursor(event, width, height) }
-function normalizePointer(event, width, height) { normalizeCursor(event, width, height) }
+function normalizeMouse(event, width, height) { return normalizeCursor(event, width, height) }
+function normalizePointer(event, width, height) { return normalizeCursor(event, width, height) }
 function normalizeCursor(event, width, height) {
   if(!event) throw "Couldn't normalize cursor, event was undefined"
   return {
@@ -84,8 +121,8 @@ function normalizeCursor(event, width, height) {
 // When the cursor is Bottom Right of the screen, the returned value is 1, 1
 //
 // Optionally, give width and height if you don't want the function to use the window inner width/height
-function clampMouse(event, width, height) { clampCursor(event, width, height) }
-function clampPointer(event, width, height) { clampCursor(event, width, height) }
+function clampMouse(event, width, height) { return clampCursor(event, width, height) }
+function clampPointer(event, width, height) { return clampCursor(event, width, height) }
 function clampCursor(event, width, height) {
   if(!event) throw "Couldn't clamp cursor, event was undefined"
   return {
