@@ -41,11 +41,11 @@ function frustrumSizeForCamera(camera, viewportWidth, viewportHeight) {
   return frustrumSize(camera.fov, viewportWidth / viewportHeight, this.camera.position.z)
 }
 function frustrumSize(fov, aspect, distance) {
-  let frustumHeight = 2.0 * distance * Math.tan(fov * 0.5 * (Math.PI / 180))
-  let frustumWidth = frustumHeight * aspect
+  var frustumHeight = 2.0 * distance * Math.tan(fov * 0.5 * (Math.PI / 180))
+  var frustumWidth = frustumHeight * aspect
   return {
-    width: frustrumWidth,
-    height: frustrumHeight
+    width: frustumWidth,
+    height: frustumHeight
   }
 }
 
